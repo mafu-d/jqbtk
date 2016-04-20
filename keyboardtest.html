@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+	<head>
+		<title>jQuery Bootstrap Touch Keyboard</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="jqbtk.css">
+	</head>
+	<body class="container">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+				<h1>jQuery Bootstrap Touch Keyboard (jQBTK)</h1>
+				<p>This jQuery plugin using Bootstrap v3 to generate a popover keyboard for use on touchscreen devices.</p>
+				<p>Requires jQuery and Bootstrap v3.</p>
+				<p>Note: since the keyboard listens for touch events, using this in a browser and clicking your mouse probably won't work. However, Chrome's Developer Tools has a 'device mode' that emulates touch events.</p>
+				
+				<h2>Installation</h2>
+				<pre>&lt;html&gt;
+	&lt;head&gt;
+		...
+		&lt;link rel="stylesheet" href="bootstrap.min.css"&gt;
+		&lt;link rel="stylesheet" href="jqbtk.css"&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		...
+		&lt;script src="jquery.min.js"&gt;&lt;/script&gt;
+		&lt;script src="bootstrap.min.js"&gt;&lt;/script&gt;
+		&lt;script src="jqbtk.js"&gt;&lt;/script&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</pre>
+				
+				<hr>
+
+				<h2>Default settings</h2>
+				<p>This is its most basic form, providing a QWERTY keyboard.</p>
+				<p><input type="text" class="keyboard form-control" id="default"></p>
+				<pre>&lt;input type="text" class="keyboard form-control" id="default"&gt;</pre>
+				<pre>$('#default').keyboard();</pre>
+
+				<h2>Telephone number input</h2>
+				<p>If the input type is "tel" then the keyboard will display as a telephone number pad.</p>
+				<p><input type="tel" class="keyboard form-control" id="telephone"></p>
+				<pre>&lt;input type="tel" class="keyboard form-control" id="telephone"&gt;</pre>
+				<pre>$('#telephone').keyboard();</pre>
+
+				<h2>Number input</h2>
+				<p>As an alternative, add the class <code>keyboard-numpad</code> to reverse the number row order.</p>
+				<p><input type="tel" class="keyboard form-control keyboard-numpad" id="number"></p>
+				<pre>&lt;input type="tel" class="keyboard keyboard-numpad form-control" id="number"&gt;</pre>
+				<pre>$('#number').keyboard();</pre>
+				
+				<h2>Password input</h2>
+				<p><input type="password" class="keyboard form-control" id="password"></p>
+				<pre>&lt;input type="password" class="keyboard form-control" id="password"&gt;</pre>
+				<pre>$('#password').keyboard();</pre>
+				
+				<h2>Custom layout</h2>
+				<p>You can also create your own custom layouts. Each row of the <code>layout</code> array is a row of buttons. Each button is specified by an array pair, where you can set the lowercase and uppercase options. There are special buttons for <code>space</code>, <code>shift</code> and <code>del</code>; otherwise, the button adds the displayed character to the input's value.</p>
+				<p><input type="text" class="keyboard form-control" id="custom"></p>
+				<pre>&lt;input type="text" class="keyboard form-control" id="custom"&gt;</pre>
+				<pre>$('#custom').keyboard({
+	layout:[
+		[['a','A'],['b','B'],['c','C'],['del','del']],
+		[['shift','shift'],['space','space']]
+	]
+});</pre>
+
+				<h2>Initial caps</h2>
+				<p>Set <code>initCaps: true</code> when instantiating the keyboard so that caps are on initially (this is useful for inputs that ask for a name, for instance). Caps will be automatically taken off after the first character.</p>
+				<p><input type="text" class="keyboard form-control" id="initcaps"></p>
+				<pre>&lt;input type="text" class="keyboard form-control" id="initcaps"&gt;</pre>
+				<pre>$('#initcaps').keyboard({initCaps:true});</pre>
+				
+				<h2>Temporary parents</h2>
+				<p>Sometimes you'll want to bind the keyboard to an element on your page that doesn't exist when the page first loads, and is dynamically inserted. As long as you can reference the input element at some point once it's been created, you can initialise it.</p>
+				<p><button class="btn btn-primary" id="addInputBtn">Add an input</button> <button class="btn btn-primary" id="removeInputBtn">Remove last input</button></p>
+				<pre>$(document).on('some-event-that-inserted-an-input',function(){
+	$('.keyboard').keyboard();
+});</pre>
+				
+				<hr>
+				
+				<h2>About the author</h2>
+				<p>Matthew Dawkins is a web developer based in Somerset, UK. He loves PHP, HTML and CSS.</p>
+				<p>Follow me on Twitter: <a href="https://twitter.com/mafu_d">@mafu_d</a></p>
+			</div>
+		</div>
+		
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="jquery.keyboard.js"></script>
+		<script>
+			$(function(){
+				$('#default').keyboard();
+				$('#number').keyboard();
+				$('#telephone').keyboard();
+				$('#custom').keyboard({
+					layout:[
+						[['a','A'],['b','B'],['c','C'],['del','del']],
+						[['shift','shift'],['space','space']]
+					]
+				});
+				$('#password').keyboard();
+				$('#initcaps').keyboard({initCaps:true});
+				$('#addInputBtn').click(function(){
+					$(this).parent().append($('<input>').attr('type','text').addClass('form-control').addClass('keyboard'));
+					$(this).siblings('.keyboard').keyboard();
+				});
+				$('#removeInputBtn').click(function(){
+					$(this).siblings('.keyboard').last().remove();
+				});
+			});
+		</script>
+	</body>
+</html>
