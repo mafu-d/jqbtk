@@ -24,22 +24,21 @@
 				[['del'],['0'],['.']]				
 			],
 			layout:false,
-			type:'keyboard',
+			type:false,
             btnTpl:'<button type="button">',
             btnClasses:'btn btn-default',
             btnActiveClasses:'active btn-primary',
 			initCaps:false
         },options);
 		if (!settings.layout) {
-			switch($(this).attr('type')) {
-				case 'tel':
-					settings.layout=settings.telLayout;
-					break;
-				case 'number':
-					settings.layout=settings.numpadLayout;
-					break;
-				default:
-					settings.layout=settings.keyboardLayout;
+			if (($(this).attr('type')==='tel' && $(this).hasClass('keyboard-numpad')) || settings.type==='numpad') {
+				settings.layout=settings.numpadLayout;
+			}
+			else if (($(this).attr('type')==='tel') || settings.type==='tel') {
+				settings.layout=settings.telLayout;
+			}
+			else {
+				settings.layout=settings.keyboardLayout;
 			}
 		}
         // Keep track of shift status

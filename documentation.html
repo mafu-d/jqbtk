@@ -44,16 +44,20 @@ and open the template in the editor.
 				<pre>$('#default').keyboard();</pre>
 
 				<h2>Telephone number input</h2>
-				<p>If the input type is "tel" then the keyboard will display as a telephone number pad.</p>
+				<p>If the input type is "tel" then the keyboard will display as a telephone number pad. Alternatively you can specify <code>type: 'tel'</code> when initialising.</p>
 				<p><input type="tel" class="keyboard form-control" id="telephone"></p>
 				<pre>&lt;input type="tel" class="keyboard form-control" id="telephone"&gt;</pre>
-				<pre>$('#telephone').keyboard();</pre>
+				<pre>$('#telephone').keyboard();
+// OR
+$('#telephone').keyboard({type:'tel'});</pre>
 
 				<h2>Number input</h2>
-				<p>As an alternative, add the class <code>keyboard-numpad</code> to reverse the number row order.</p>
+				<p>As an alternative, add the class <code>keyboard-numpad</code> to reverse the number row order., or use <code>type: 'numpad'</code>.</p>
 				<p><input type="tel" class="keyboard form-control keyboard-numpad" id="number"></p>
 				<pre>&lt;input type="tel" class="keyboard keyboard-numpad form-control" id="number"&gt;</pre>
-				<pre>$('#number').keyboard();</pre>
+				<pre>$('#number').keyboard();
+// OR
+$('number').keyboard({type:'numpad'});</pre>
 				
 				<h2>Password input</h2>
 				<p><input type="password" class="keyboard form-control" id="password"></p>
