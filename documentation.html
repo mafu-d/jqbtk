@@ -19,10 +19,10 @@ and open the template in the editor.
 				<p>This jQuery plugin using Bootstrap v3 to generate a popover keyboard for use on touchscreen devices.</p>
 				<p>Requires jQuery and Bootstrap v3.</p>
 				<p>Note: since the keyboard listens for touch events, using this in a browser and clicking your mouse probably won't work. However, Chrome's Developer Tools has a 'device mode' that emulates touch events.</p>
-				
+
 				<h2>Download</h2>
 				<p>Download the latest release from <a href="https://github.com/mafu-d/jqbtk" target="_blank">GitHub</a>.</p>
-				
+
 				<h2>Installation</h2>
 				<pre>&lt;html&gt;
 	&lt;head&gt;
@@ -37,7 +37,7 @@ and open the template in the editor.
 		&lt;script src="jqbtk.min.js"&gt;&lt;/script&gt;
 	&lt;/body&gt;
 &lt;/html&gt;</pre>
-				
+
 				<hr>
 
 				<h2>Default settings</h2>
@@ -61,12 +61,12 @@ $('#telephone').keyboard({type:'tel'});</pre>
 				<pre>$('#number').keyboard();
 // OR
 $('number').keyboard({type:'numpad'});</pre>
-				
+
 				<h2>Password input</h2>
 				<p><input type="password" class="keyboard form-control" id="password"></p>
 				<pre>&lt;input type="password" class="keyboard form-control" id="password"&gt;</pre>
 				<pre>$('#password').keyboard();</pre>
-				
+
 				<h2>Custom layout</h2>
 				<p>You can also create your own custom layouts. Each row of the <code>layout</code> array is a row of buttons. Each button is specified by an array pair, where you can set the lowercase and uppercase options. There are special buttons for <code>space</code>, <code>shift</code> and <code>del</code>; otherwise, the button adds the displayed character to the input's value.</p>
 				<p><input type="text" class="keyboard form-control" id="custom"></p>
@@ -83,24 +83,29 @@ $('number').keyboard({type:'numpad'});</pre>
 				<p><input type="text" class="keyboard form-control" id="initcaps"></p>
 				<pre>&lt;input type="text" class="keyboard form-control" id="initcaps"&gt;</pre>
 				<pre>$('#initcaps').keyboard({initCaps:true});</pre>
-				
+
 				<h2>Temporary parents</h2>
 				<p>Sometimes you'll want to bind the keyboard to an element on your page that doesn't exist when the page first loads, and is dynamically inserted. As long as you can reference the input element at some point once it's been created, you can initialise it.</p>
 				<p><button class="btn btn-primary" id="addInputBtn">Add an input</button> <button class="btn btn-primary" id="removeInputBtn">Remove last input</button></p>
 				<pre>$(document).on('some-event-that-inserted-an-input',function(){
 	$('.keyboard').keyboard();
 });</pre>
-				
+
+				<h2>Position</h2>
+				<p>Sometimes you need to change the position of the keyboard relative to the text box. Set the <code>placement</code> parameter when instantiating the keyboard, using any of the valid values from the <a href="http://getbootstrap.com/javascript/#popovers-options" target="_blank">Bootstrap popover</a>.</p>
+				<p><input type="text" class="form-control" id="placement"></p>
+				<pre>$('#placement').keyboard({placement:'top'});</pre>
+
 				<hr>
-				
+
 				<h2>About the author</h2>
 				<p>Matthew Dawkins is a web developer based in Somerset, UK. He loves PHP, HTML and CSS.</p>
 				<p><a href="http://www.matthewdawkins.co.uk" target="_blank">www.matthewdawkins.co.uk</a></p>
 				<p>Follow me on Twitter: <a href="https://twitter.com/mafu_d" target="_blank">@mafu_d</a></p>
 			</div>
 		</div>
-		
-		
+
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script src="jqbtk.min.js"></script>
@@ -124,6 +129,7 @@ $('number').keyboard({type:'numpad'});</pre>
 				$('#removeInputBtn').click(function(){
 					$(this).siblings('.keyboard').last().remove();
 				});
+				$('#placement').keyboard({placement:'top'});
 			});
 		</script>
 	</body>

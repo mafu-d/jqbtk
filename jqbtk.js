@@ -21,14 +21,15 @@
 				[['1'],['2'],['3']],
 				[['4'],['5'],['6']],
 				[['7'],['8'],['9']],
-				[['del'],['0'],['.']]				
+				[['del'],['0'],['.']]
 			],
 			layout:false,
 			type:false,
             btnTpl:'<button type="button">',
             btnClasses:'btn btn-default',
             btnActiveClasses:'active btn-primary',
-			initCaps:false
+			initCaps:false,
+            placement:'bottom'
         },options);
 		if (!settings.layout) {
 			if (($(this).attr('type')==='tel' && $(this).hasClass('keyboard-numpad')) || settings.type==='numpad') {
@@ -131,7 +132,7 @@
                     return content;
                 },
                 html:true,
-                placement:'bottom',
+                placement:settings.placement,
                 trigger:'focus',
                 container:'body',
                 viewport:'body'
