@@ -68,7 +68,7 @@ $('number').keyboard({type:'numpad'});</pre>
 				<pre>$('#password').keyboard();</pre>
 
 				<h2>Custom layout</h2>
-				<p>You can also create your own custom layouts. Each row of the <code>layout</code> array is a row of buttons. Each button is specified by an array pair, where you can set the lowercase and uppercase options. There are special buttons for <code>space</code>, <code>shift</code> and <code>del</code>; otherwise, the button adds the displayed character to the input's value.</p>
+                <p>You can also create your own custom layouts. Each row of the <code>layout</code> array is a row of buttons. Each button is specified by an array pair, where you can set the lowercase and uppercase options. There are special buttons for <code>space</code>, <code>shift</code>, <code>enter</code>, and <code>del</code>; otherwise, the button adds the displayed character to the input's value.</p>
 				<p><input type="text" class="keyboard form-control" id="custom"></p>
 				<pre>&lt;input type="text" class="keyboard form-control" id="custom"&gt;</pre>
 				<pre>$('#custom').keyboard({
@@ -97,6 +97,12 @@ $('number').keyboard({type:'numpad'});</pre>
 				<pre>$('#placement').keyboard({placement:'top'});</pre>
 
 				<hr>
+
+				<h2>Enter key to submit forms</h2>
+                <p>The special key <code>enter</code> submits the form containing the input. With real keyboards most browsers also act this way, provided that there is a submit button. The enter key for form submission can be useful on touch displays where no real keyboard is present &ndash; especially if there is a lack of screen space for a submit button.</p>
+                <form action="#" method="get">
+				<p><input type="text" class="keyboard form-control keyboard-numpad" id="customWithEnter"></p>
+                </form>
 
 				<h2>About the author</h2>
 				<p>Matthew Dawkins is a web developer based in Somerset, UK. He loves PHP, HTML and CSS.</p>
@@ -130,6 +136,12 @@ $('number').keyboard({type:'numpad'});</pre>
 					$(this).siblings('.keyboard').last().remove();
 				});
 				$('#placement').keyboard({placement:'top'});
+				$('#customWithEnter').keyboard({
+					layout:[
+						[['a','A'],['b','B'],['c','C'],['del','del']],
+						[['shift','shift'],['space','space'],['enter','enter']]
+					]
+				});
 			});
 		</script>
 	</body>
