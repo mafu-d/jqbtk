@@ -64,6 +64,9 @@
                 case 'del':
                     currentContent=currentContent.substr(0,currentContent.length-1);
                     break;
+                case 'enter':
+                    parent.closest('form').submit();
+                    break;
                 default:
                     currentContent+=keyContent;
                     keyboardShift=false;
@@ -89,6 +92,7 @@
                     case 'shift':
                     case 'del':
                     case 'space':
+                    case 'enter':
                         break;
                     default:
                         $(this).text($(this).attr('data-value'+(keyboardShift?'-alt':'')));
@@ -121,6 +125,9 @@
                                     break;
                                 case 'del':
                                     btn.addClass('jqbtk-del').html('<span class="glyphicon glyphicon-arrow-left"></span>');
+                                    break;
+                                case 'enter':
+                                    btn.addClass('jqbtk-enter').html('Enter');
                                     break;
                                 default:
                                     btn.text(btn.attr('data-value'+(keyboardShift?'-alt':'')));
