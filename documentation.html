@@ -121,25 +121,25 @@ $('number').keyboard({type:'numpad'});</pre>
 				$('#number').keyboard();
 				$('#telephone').keyboard();
 				$('#custom').keyboard({
-					layout:[
-						[['a','A'],['b','B'],['c','C'],['del','del']],
-						[['shift','shift'],['space','space']]
+					layout: [
+						[['a', 'A'], ['b', 'B'], ['c', 'C'], ['del', 'del']],
+						[['shift', 'shift'], ['space', 'space']]
 					]
 				});
 				$('#password').keyboard();
-				$('#initcaps').keyboard({initCaps:true});
-				$('#addInputBtn').click(function(){
-					$(this).parent().append($('<input>').attr('type','text').addClass('form-control').addClass('keyboard'));
+				$('#initcaps').keyboard({initCaps: true});
+				$('#addInputBtn').click(function() {
+					$(this).parent().append($('<input>').attr('type', 'text').addClass('form-control').addClass('keyboard'));
 					$(this).siblings('.keyboard').keyboard();
 				});
-				$('#removeInputBtn').click(function(){
+				$('#removeInputBtn').click(function() {
 					$(this).siblings('.keyboard').last().remove();
 				});
-				$('#placement').keyboard({placement:'top'});
+				$('#placement').keyboard({placement: 'top'});
 				$('#customWithEnter').keyboard({
-					layout:[
-						[['a','A'],['b','B'],['c','C'],['del','del']],
-						[['shift','shift'],['space','space'],['enter','enter']]
+					layout: [
+						[['a', 'A'], ['b', 'B'], ['c', 'C'], ['del', 'del']],
+						[['shift', 'shift'], ['space', 'space'], ['enter', 'enter']]
 					]
 				});
 			});
