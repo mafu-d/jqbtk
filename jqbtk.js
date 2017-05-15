@@ -110,11 +110,13 @@
             ],
             layout: false,
             type: false,
-            btnTpl: '<button type="button">',
+            btnTpl: '<button type="button" tabindex="-1">',
             btnClasses: 'btn btn-default',
             btnActiveClasses: 'active btn-primary',
             initCaps: false,
-            placement: 'bottom'
+            placement: 'bottom',
+            container:'body',
+            trigger: 'focus'
         }, options);
         if (!settings.layout) {
             if (($(this).attr('type') === 'tel' && $(this).hasClass('keyboard-numpad')) || settings.type === 'numpad') {
@@ -129,9 +131,7 @@
         var keyboardShift = false;
 
         // Listen for keypresses
-        $(document).off('touchstart', '.jqbtk-row .btn');
-        $(document).on('touchstart', '.jqbtk-row .btn', function(e) {
-            //e.preventDefault();
+        var onKeypress = function(e) {
             $(this).addClass(settings.btnActiveClasses);
             var keyContent = $(this).attr('data-value' + (keyboardShift ? '-alt' : ''));
             var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
@@ -157,17 +157,41 @@
             parent.val(currentContent);
             keyboardShiftify();
             parent.focus();
-        });
-        $(document).on('touchend', '.jqbtk-row .btn', function() {
-            $(this).removeClass(settings.btnActiveClasses);
-        });
-        // Prevent clicks on the popover from cancelling the focus
-        $(document).on('touchstart', '.jqbtk-row', function(e) {
+        };
+        $(document).off('touchstart', '.jqbtk-row .btn');
+        $(document).on('touchstart', '.jqbtk-row .btn', onKeypress);
+
+        $(document).off('mousedown', '.jqbtk-row .btn');
+        $(document).on('mousedown', '.jqbtk-row .btn',function(e){
+            onKeypress.bind(this,e)();
+            var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
+            parent.focus();
             e.preventDefault();
+        });
+
+        // All those trouble just to prevent clicks on the popover from cancelling the focus
+        $(document).off('mouseup', '.jqbtk-row .btn');
+        $(document).on('mouseup', '.jqbtk-row .btn',function(e){
+            $(this).removeClass(settings.btnActiveClasses);
             var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
             parent.focus();
         });
 
+        $(document).on('click', '.jqbtk-row .btn',function(e){
+            var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
+            parent.focus();
+        });
+        $(document).on('touchend', '.jqbtk-row .btn', function() {
+            $(this).removeClass(settings.btnActiveClasses);
+            var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
+            parent.focus();
+        });
+        $(document).on('touchend', '.jqbtk-row', function(e) {
+            e.preventDefault();
+            var parent = $('[aria-describedby=' + $(this).closest('.popover').attr('id') + ']');
+            parent.focus();
+
+        });
         // Update keys according to shift status
         var keyboardShiftify = function() {
             $('.jqbtk-container .btn').each(function() {
@@ -182,7 +206,15 @@
                 }
             });
         };
-
+        var container = this.data('container');
+        if(container!=undefined)
+        {
+          container = '#'+container;
+          settings.container = container;
+          settings.placement = 'in';
+          settings.trigger = 'manual';
+          $(container).addClass('keyboard-container');
+        }
         // Set up a popover on each of the targeted elements
         return this.each(function() {
             $(this).popover({
@@ -192,7 +224,7 @@
                         keyboardShift = true;
                     }
                     // Set up container
-                    var content = $('<div class="jqbtk-container">');
+                    var content = $('<div class="jqbtk-container" tabIndex="-1">');
                     $.each(settings.layout, function() {
                         var line = this;
                         var lineContent = $('<div class="jqbtk-row">');
@@ -223,10 +255,14 @@
                 },
                 html: true,
                 placement: settings.placement,
-                trigger: 'focus',
-                container: 'body',
-                viewport: 'body'
+                trigger: settings.trigger,
+                container:settings.container,
+                viewport: settings.container
             });
+            if(settings.trigger == 'manual')
+            {
+              $(this).popover('show');
+            }
         });
     };
 }(jQuery));
