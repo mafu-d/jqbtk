@@ -1,4 +1,7 @@
 # jQuery Bootstrap Touch Keyboard (jQBTK)
+
+**This project is sadly no longer in development**
+
 This jQuery plugin using Bootstrap v3 to generate a popover keyboard for use on touchscreen devices. It was originally designed for use on large touchscreen computers used in a kiosk scenario, but would probably work elsewhere too.
 
 Uses the Bootstrap popover component and dynamically adds buttons to form a keyboard, inserting the characters into the HTML input when pressed.
